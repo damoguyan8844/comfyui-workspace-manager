@@ -91,7 +91,7 @@ export default function App() {
           ...workflowsTable.curWorkflow!,
           json: lastSavedJson,
         });
-        await app.loadGraphData(JSON.parse(lastSavedJson));
+        await app.loadGraphData(JSON.parse(lastSavedJson), true, true);
         setIsDirty(false);
       } else {
         alert("Error: No last saved version found");
@@ -220,11 +220,11 @@ export default function App() {
         ...flow,
         json: version.json,
       });
-      app.loadGraphData(JSON.parse(version.json));
+      app.loadGraphData(JSON.parse(version.json), true, true, version.path + "." + version);
     } else {
       setCurFlowIDAndName(flow);
       setCurVersion(null);
-      app.loadGraphData(JSON.parse(flow.json));
+      app.loadGraphData(JSON.parse(flow.json), true, true, flow.path);
     }
     setRoute("root");
     isDirty && setIsDirty(false);

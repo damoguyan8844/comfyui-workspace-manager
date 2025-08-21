@@ -204,6 +204,7 @@ export namespace TwowaySyncAPI {
     createTime?: number;
     updateTime?: number;
     error?: string;
+    path?: string;
   }> {
     const relPath = joinRelPath(parentFolderID ?? "", name + ".json");
     try {
@@ -229,6 +230,7 @@ export namespace TwowaySyncAPI {
           level: "error",
         });
       }
+      result.path = relPath;
       return result;
     } catch (error) {
       console.error(`Erro finding file <${id}> at "${relPath}"`, error);

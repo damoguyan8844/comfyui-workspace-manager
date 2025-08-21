@@ -205,7 +205,7 @@ export function VersionHistoryDrawer({ onClose }: { onClose: () => void }) {
                               );
                               return;
                             }
-                            app.loadGraphData(JSON.parse(version.json));
+                            app.loadGraphData(JSON.parse(version.json), true, true, version.id);
                             onClose();
                           }}
                         >
@@ -242,7 +242,7 @@ export function VersionHistoryDrawer({ onClose }: { onClose: () => void }) {
                             );
                             return;
                           }
-                          app.loadGraphData(JSON.parse(c.json));
+                          app.loadGraphData(JSON.parse(c.json), true, true, c.id);
                           onClose();
                         }}
                         isActive={c.id === selectedVersion}

@@ -352,10 +352,14 @@ export class WorkflowsTable extends TableBase<Workflow> {
     if (!data.json) {
       return undefined;
     }
-    return {
+
+    let fileData = {
       ...wf,
+      path: data.path,
       json: JSON.stringify(data.json),
-    };
+    }
+    //console.log('fileData', fileData)
+    return fileData;
   }
 
   public async listAll(sortBy?: ESortTypes): Promise<Workflow[]> {
