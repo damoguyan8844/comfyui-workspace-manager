@@ -72,7 +72,17 @@ export default function App() {
           isAutoSave: false,
         }),
       ]);
+      // await app.loadGraphData(JSON.parse(graphJson), true, true);
       setIsDirty(false);
+      //await app.canvas?.setDirty(false, true);
+      const eventSave = new KeyboardEvent('keydown', {
+        key: "s",
+        code: "KeyS",
+        ctrlKey: true
+      });
+      window.dispatchEvent(eventSave);
+      //window.location.href = window.location.href;
+      //window.location.reload();
     }
   }, []);
 
@@ -91,7 +101,7 @@ export default function App() {
           ...workflowsTable.curWorkflow!,
           json: lastSavedJson,
         });
-        await app.loadGraphData(JSON.parse(lastSavedJson), true, true);
+        await app.loadGraphData(JSON.parse(lastSavedJson), true, true, workflowsTable?.curWorkflow?.path );
         setIsDirty(false);
       } else {
         alert("Error: No last saved version found");
@@ -220,11 +230,11 @@ export default function App() {
         ...flow,
         json: version.json,
       });
-      app.loadGraphData(JSON.parse(version.json), true, true, version.path + "." + version);
+      app.loadGraphData(JSON.parse(version.json), true, true, ("version: " + version.id).replace(/\\/g, "/"));
     } else {
       setCurFlowIDAndName(flow);
       setCurVersion(null);
-      app.loadGraphData(JSON.parse(flow.json), true, true, flow.path);
+      app.loadGraphData(JSON.parse(flow.json), true, true, flow.path?.replace(/\\/g, "/"));
     }
     setRoute("root");
     isDirty && setIsDirty(false);

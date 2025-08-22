@@ -15,7 +15,8 @@ export interface Workflow extends SortableItem {
   saveLock?: boolean;
   cloudID?: string | null;
   createTime: number;
-
+  path: string | null;
+  
   // will be deprecated
   privacy?: WorkflowPrivacy;
   tags?: string[];
